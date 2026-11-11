@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+/* ───── Brand palette & fonts (edit colours here) ───── */
+@theme {
+  --color-paper: #faf7f2;   /* off-white background */
+  --color-sand: #f2ede4;    /* slightly darker panel */
+  --color-ink: #1c1a17;     /* near-black text */
+  --color-muted: #6e675e;   /* secondary text */
+  --color-line: #e3dcd0;    /* hairlines */
+  --color-accent: #a4532f;  /* terracotta */
+  --color-accent-dark: #86411f;
+}
+
+@theme inline {
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-inter), "Inter", system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  -webkit-text-size-adjust: 100%;
+  /* Hide the page scrollbar — scrolling still works with wheel, touch and keys */
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ───── Paper / linen grain ─────
+   A fixed, non-interactive layer of SVG noise over the whole page.
+   Raise/lower --grain-opacity to taste (0 turns it off). */
+:root {
+  --grain-opacity: 0.06;
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.1 0 0 0 0 0.09 0 0 0 1.4 -0.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-paper);
+}
+
+/* ───── Subtle fade-in on scroll (only when JS is on) ───── */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ───── FAQ accordion (native <details>) ───── */
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
+details .faq-icon { transition: transform 0.3s ease; }
+details[open] .faq-icon { transform: rotate(45deg); }
+
+/* Make the native date picker icon match the palette */
+input[type="date"]::-webkit-calendar-picker-indicator { opacity: 0.5; cursor: pointer; }

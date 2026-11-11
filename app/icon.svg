@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Favicon placeholder: replace this file with your own logo (SVG or app/icon.png) -->
+  <rect width="64" height="64" rx="12" fill="#1c1a17"/>
+  <text x="32" y="43" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-style="italic" fill="#faf7f2">cv</text>
+  <circle cx="49" cy="20" r="3" fill="#a4532f"/>
+</svg>
